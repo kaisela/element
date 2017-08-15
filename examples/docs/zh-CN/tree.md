@@ -141,6 +141,7 @@
         console.log(data);
       },
       loadNode(node, resolve, isMore) {
+      debugger;
         if (node.level === 0) {
         return resolve([{
                                                         'name': '全部'
@@ -154,11 +155,40 @@
                                                 'categroy': '行业',
                                                 'aggName': 'A',
                                                 
-                                              }, {
-                                                'name': 'Begion2',
-                                                'selected': 2,
-                                                'aggName': 'B',
-                                              }]);
+                                              }, 
+{
+  'name': 'Begion2',
+  'selected': 2,
+  'aggName': 'B',
+},{
+   'name': 'Begion2',
+   'selected': 2,
+   'aggName': 'B',
+ },{
+    'name': 'Begion2',
+    'selected': 2,
+    'aggName': 'B',
+  },{
+     'name': 'Begion2',
+     'selected': 2,
+     'aggName': 'B',
+   },{
+      'name': 'Begion2',
+      'selected': 2,
+      'aggName': 'B',
+    },{
+       'name': 'Begion2',
+       'selected': 2,
+       'aggName': 'B',
+     },{
+        'name': 'Begion2',
+        'selected': 2,
+        'aggName': 'B',
+      },{
+         'name': 'Begion2',
+         'selected': 2,
+         'aggName': 'B',
+       }]);
         }
         if (node.level === 2 && node.data.name === 'Aegion1') {
                   return resolve([{
@@ -171,7 +201,7 @@
                                                         'name': 'Znode2',
                                                         'selected': 2,
                                                         'aggName': 'Z',
-                                                        'isLeaf': true
+                                                        'iseaf': true
                                                       }]);
                 }else if(node.data.name === 'Begion2'){
                 return resolve([]);

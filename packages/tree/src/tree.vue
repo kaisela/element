@@ -89,12 +89,11 @@ div{
 }
 .el-tree-nodes{
   height: 100%;
-  overflow-y: auto;
+  overflow: auto;
 }
 .el-tree-all .el-tree-node{
   border: none;
   height: 70px;
-  overflow-y: auto;
   position: absolute;
   top: 50%;
   margin-top: -45px;
@@ -164,7 +163,7 @@ div{
 .el-tree-sub{
   width: 100%;
   height: 100%;
-  overflow-y: auto;
+  overflow: auto;
 }
 </style>
 <script>
@@ -320,6 +319,7 @@ div{
       resetData() {
         this.expendNodes = [this.root.childNodes[0]];
         this.root.childNodes[0].expand();
+        this.root.childNodes[0].setChecked(true, {});
         this.root.childNodes[0].childNodes.forEach((node) => {
           node.collapse();
           node.setLoaded(false);
