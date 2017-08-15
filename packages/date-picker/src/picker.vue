@@ -260,6 +260,10 @@ export default {
     value: {
       immediate: true,
       handler(val) {
+        if (typeof val === 'string') {
+          val = val.replace('-', '/');
+          val = val.replace('-', '/');
+        }
         this.currentValue = isDate(val) ? new Date(val) : val;
       }
     },
