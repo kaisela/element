@@ -10,7 +10,7 @@
       'hover': parent.hoverIndex === index
     }">
     <slot>
-      <span>{{ currentLabel }}</span>
+      <span style="padding-right: 20px;">{{ currentLabel }}</span>
     </slot>
   </li>
 </template>
