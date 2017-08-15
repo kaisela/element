@@ -37,7 +37,7 @@
               </td>
         <td v-if="expendNodes.length > 0 && expendNode.childNodes.length > 0" v-for="expendNode in expendNodes" :class="expendNode.childNodes[0].data.categroy?'categroy':''">
           <div class="categroy-title" v-if="expendNode.childNodes[0].data.categroy">{{expendNode.childNodes[0].data.categroy}}</div>
-          <div class="el-tree-sub" v-scroll="{fun:loadMore,arg:expendNode}">
+          <div class="el-tree-sub" :style="{height: expendNode.childNodes[0].data.categroy ? (elHeight-36)+'px':elHeight + 'px'}" v-scroll="{fun:loadMore,arg:expendNode}">
             <el-tree-node
                     v-for="child in expendNode.childNodes"
                     :node="child"
@@ -170,6 +170,7 @@ div{
   import TreeStore from './model/tree-store';
   import {t} from 'my-element-ui/src/locale';
   import emitter from 'my-element-ui/src/mixins/emitter';
+  import {getStyle} from 'my-element-ui/src/utils/dom'
 
   export default {
     name: 'ElTree',
@@ -186,7 +187,8 @@ div{
         root: null,
         currentNode: null,
         expendNodes: [],
-        oldExpend: []
+        oldExpend: [],
+        elHeight: null
       };
     },
 
@@ -363,6 +365,8 @@ div{
     mounted() {
       this.expendNodes.push(this.root.childNodes[0]);
       this.root.childNodes[0].expand();
+      let el = document.getElementsByClassName("el-tree-levels")[0];
+      this.elHeight = parseInt(getStyle(el, 'height'));
     },
     created() {
       this.isTree = true;
