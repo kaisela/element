@@ -16,8 +16,8 @@
         <template v-for="(item, index) in suggestions" v-else>
           <li
             v-if="!parent.customItem&&html"
-            :class="{'highlighted': parent.highlightedIndex === index,'disabled':item.openType?(item.openType=='0'?true:false):false}"
-            :title="item.openType?(item.openType=='0'?'暂不支持爬取，如有需求请联系客服人员':''):''"
+            :class="{'highlighted': parent.highlightedIndex === index,'disabled':!item.openType?true:false}"
+            :title="!item.openType?'暂不支持爬取，如有需求请联系客服人员':''"
             @click="select(item)"
             v-html='item[props.label]'
           >
