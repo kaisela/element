@@ -14,14 +14,25 @@
         <li v-if="parent.loading"><i class="el-icon-loading"></i></li>
         <li v-else-if='suggestions.length==0 && dropNone'>查无数据</li>
         <template v-for="(item, index) in suggestions" v-else>
-          <li
-            v-if="!parent.customItem&&html"
-            :class="{'highlighted': parent.highlightedIndex === index,'disabled':!item.openType?true:false}"
-            :title="!item.openType?'暂不支持爬取，如有需求请联系客服人员':''"
-            @click="select(item)"
-            v-html='item[props.label]'
-          >
-          </li>
+        <li
+          v-if="!parent.customItem&&html"
+          :class="{'highlighted': parent.highlightedIndex === index,'disabled':!item.openType?true:false}"
+          @click="select(item)"
+        >
+          <p class="content"
+             v-html='item[props.label]'
+             @mouseenter.self='showTip(item)'
+             @mouseout='hideTip'>
+          </p>
+          <div class="el-tooltip__popper is-dark" 
+               v-if='(!parent.customItem)&&html&&(item.targId==id)'>
+            <div v-html="!item.openType?'暂不支持爬取，如有需求请联系客服人员':item[props.label]"></div>
+            <div x-arrow 
+                 class='arrow'>
+            </div>
+          </div>
+        </li>
+          
           <li
             v-if="!parent.customItem&&!html"
             :class="{'highlighted': parent.highlightedIndex === index}"
@@ -46,9 +57,13 @@
   import Popper from 'my-element-ui/src/utils/vue-popper';
   import Emitter from 'my-element-ui/src/mixins/emitter';
   import ElScrollbar from 'my-element-ui/packages/scrollbar';
+  import ElTooltip from 'my-element-ui/packages/tooltip';
 
   export default {
-    components: { ElScrollbar },
+    components: { 
+      ElScrollbar,
+      ElTooltip
+   },
     mixins: [Popper, Emitter],
 
     componentName: 'ElAutocompleteSuggestions',
@@ -56,7 +71,8 @@
     data() {
       return {
         parent: this.$parent,
-        dropdownWidth: ''
+        dropdownWidth: '',
+        id: null
       };
     },
 
@@ -82,6 +98,12 @@
             this.dispatch('ElAutocomplete', 'item-click', item);
           }
         }
+      },
+      showTip(item) {
+        this.id = item.targId;
+      },
+      hideTip() {
+        this.id = null;
       }
     },
 
