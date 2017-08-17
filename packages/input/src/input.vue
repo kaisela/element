@@ -231,7 +231,8 @@
           this.value.from = '';
           this.$refs.inputFrom.value = '';
         } else if (/^\d+(\.\d{1,2})?$/.test(value) && (this.value.to === '' || Number(value) < Number(this.value.to))) {
-          this.value.from = value;
+          this.value.from = Number(value).toString();
+          this.$refs.inputFrom.value = Number(value).toString();
         } else {
           this.$refs.inputFrom.value = this.value.from;
         }
@@ -243,7 +244,7 @@
         if (value === '') {
           this.value.to = '';
           this.$refs.inputTo.value = '';
-        } else if (/^\d+(\.\d{1,2})?$/.test(value) && (value.length < 16 || Number(value) > Number(this.value.from))) {
+        } else if (/^\d+(\.\d{1,2})?$/.test(value) && value > 0 && (value.length < 16 || Number(value) > Number(this.value.from))) {
           this.value.to = value;
         } else {
           this.$refs.inputTo.value = this.value.to;
