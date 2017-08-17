@@ -207,7 +207,30 @@
                 }
                 
         
-        
+        //if (node.level > 2) return resolve([]);
+        //var hasChild;
+        //if (node.data.name === 'region1') {
+        //  hasChild = true;
+        //} else if (node.data.name === 'region2') {
+        //  hasChild = false;          
+        //} else {
+        //  hasChild = Math.random() > 0.5;
+        //}
+
+        //setTimeout(function() {
+         // var data;
+         // if (hasChild) {
+         //   data = [{
+         //     name: 'zone' + count++
+         //   }, {
+         //     name: 'zone' + count++
+         //   }];
+         // } else {
+         //   data = [];
+         // }
+
+         // resolve(data);
+        //}, 5000);
       },
       getCheckedNodes() {
         console.log(this.$refs.tree.getCheckedNodes());
@@ -240,22 +263,7 @@
       remove(store, data) {
         store.remove(data);
       },
-      showTree(){
-        this.show = true;
-        let that = this;
-        setTimeout(function(){
-          that.$refs.tree1.setElHeight();
-        },20);
-        
-      },
-      showTree1(){
-              this.show1 = true;
-              let that = this;
-              setTimeout(function(){
-                that.$refs.tree2.setElHeight();
-              },20);
-              
-            },
+
       renderContent(h, { node, data, store }) {
         return (
           <span style="white-space: normal">
@@ -282,8 +290,6 @@
         regions,
         defaultProps,
         props,
-        show:false,
-        show1:false,
         defaultCheckedKeys: [5],
         defaultExpandedKeys: [2, 3],
         filterText: ''
@@ -296,36 +302,85 @@
 
 用清晰的层级结构展示信息，可展开或折叠。
 
+### 基础用法
+
+基础的树形结构展示。
+
+::: demo
+```html
+<el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          label: '一级 1',
+          children: [{
+            label: '二级 1-1',
+            children: [{
+              label: '三级 1-1-1'
+            }]
+          }]
+        }, {
+          label: '一级 2',
+          children: [{
+            label: '二级 2-1',
+            children: [{
+              label: '三级 2-1-1'
+            }]
+          }, {
+            label: '二级 2-2',
+            children: [{
+              label: '三级 2-2-1'
+            }]
+          }]
+        }, {
+          label: '一级 3',
+          children: [{
+            label: '二级 3-1',
+            children: [{
+              label: '三级 3-1-1'
+            }]
+          }, {
+            label: '二级 3-2',
+            children: [{
+              label: '三级 3-2-1'
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### 可选择
 
 适用于需要选择层级时使用。在下例中，由于在点击时才进行该层数据的获取，导致层级不可预知，如果没有下层数据，则点击后下拉按钮会消失。
 
 ::: demo
 ```html
-<input type="button" value="展现" @click="showTree">
 <el-tree
   :data="regions"
   :props="props"
   :load="loadNode"
   lazy
-  v-show="show"
   ref="tree1"
   show-checkbox
   @check-change="handleCheckChange">
 </el-tree>
 
-
-<input type="button" value="展现" @click="showTree1">
-<el-tree
-  :data="regions"
-  :props="props"
-  :load="loadNode"
-  lazy
-  v-show="show1"
-  ref="tree2"
-  show-checkbox
-  @check-change="handleCheckChange">
-</el-tree>
 <script>
   export default {
     data() {
@@ -426,11 +481,406 @@
 ```
 :::
 
+### 默认展开和默认选中
+可将 Tree 的某些节点设置为默认展开或默认选中
 
+::: demo 分别通过`default-expanded-keys`和`default-checked-keys`设置默认展开和默认选中的节点。需要注意的是，此时必须设置`node-key`，其值为节点数据中的一个字段名，该字段在整棵树中是唯一的。
+```html
+<el-tree
+  :data="data2"
+  show-checkbox
+  node-key="id"
+  :default-expanded-keys="[1]"
+  :default-checked-keys="[5]"
+  :props="defaultProps">
+</el-tree>
 
+<script>
+  export default {
+    data() {
+      return {
+        data2: [{
+          id: 1,
+          label: '一级 1',
+          children: [{
+            id: 4,
+            label: '二级 1-1',
+            children: [{
+              id: 9,
+              label: '三级 1-1-1'
+            }, {
+              id: 10,
+              label: '三级 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: '一级 2',
+          children: [{
+            id: 5,
+            label: '二级 2-1'
+          }, {
+            id: 6,
+            label: '二级 2-2'
+          }]
+        }, {
+          id: 3,
+          label: '一级 3',
+          children: [{
+            id: 7,
+            label: '二级 3-1'
+          }, {
+            id: 8,
+            label: '二级 3-2'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    }
+  };
+</script>
+```
+:::
 
+### 树节点的选择
 
+::: demo 本例展示如何获取和设置选中节点。获取和设置各有两种方式：通过 node 或通过 key。如果需要通过 key 来获取或设置，则必须设置`node-key`。
+```html
+<el-tree
+  :data="data2"
+  show-checkbox
+  default-expand-all
+  node-key="id"
+  ref="tree"
+  highlight-current
+  :props="defaultProps">
+</el-tree>
 
+<div class="buttons">
+  <el-button @click="getCheckedNodes">通过 node 获取</el-button>
+  <el-button @click="getCheckedKeys">通过 key 获取</el-button>
+  <el-button @click="setCheckedNodes">通过 node 设置</el-button>
+  <el-button @click="setCheckedKeys">通过 key 设置</el-button>
+  <el-button @click="resetChecked">清空</el-button>
+</div>
+
+<script>
+  export default {
+    methods: {
+      getCheckedNodes() {
+        console.log(this.$refs.tree.getCheckedNodes());
+      },
+      getCheckedKeys() {
+        console.log(this.$refs.tree.getCheckedKeys());
+      },
+      setCheckedNodes() {
+        this.$refs.tree.setCheckedNodes([{
+          id: 5,
+          label: '二级 2-1'
+        }, {
+          id: 9,
+          label: '三级 1-1-1'
+        }]);
+      },
+      setCheckedKeys() {
+        this.$refs.tree.setCheckedKeys([3]);
+      },
+      resetChecked() {
+        this.$refs.tree.setCheckedKeys([]);
+      }
+    },
+
+    data() {
+      return {
+        data2: [{
+          id: 1,
+          label: '一级 1',
+          children: [{
+            id: 4,
+            label: '二级 1-1',
+            children: [{
+              id: 9,
+              label: '三级 1-1-1'
+            }, {
+              id: 10,
+              label: '三级 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: '一级 2',
+          children: [{
+            id: 5,
+            label: '二级 2-1'
+          }, {
+            id: 6,
+            label: '二级 2-2'
+          }]
+        }, {
+          id: 3,
+          label: '一级 3',
+          children: [{
+            id: 7,
+            label: '二级 3-1'
+          }, {
+            id: 8,
+            label: '二级 3-2'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    }
+  };
+</script>
+```
+:::
+
+### 自定义节点内容
+节点的内容支持自定义，可以在节点区添加按钮或图标等内容
+
+::: demo 使用`render-content`指定渲染函数，该函数返回需要的节点区内容即可。渲染函数的用法请参考 Vue 文档。注意：由于 jsfiddle 不支持 JSX 语法，所以本例在 jsfiddle 中无法运行。但是在实际的项目中，只要正确地配置了相关依赖，就可以正常运行。
+```html
+<el-tree
+  :data="data2"
+  :props="defaultProps"
+  show-checkbox
+  node-key="id"
+  default-expand-all
+  :expand-on-click-node="false"
+  :render-content="renderContent">
+</el-tree>
+
+<script>
+  let id = 1000;
+
+  export default {
+    data() {
+      return {
+        data2: [{
+          id: 1,
+          label: '一级 1',
+          children: [{
+            id: 4,
+            label: '二级 1-1',
+            children: [{
+              id: 9,
+              label: '三级 1-1-1'
+            }, {
+              id: 10,
+              label: '三级 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: '一级 2',
+          children: [{
+            id: 5,
+            label: '二级 2-1'
+          }, {
+            id: 6,
+            label: '二级 2-2'
+          }]
+        }, {
+          id: 3,
+          label: '一级 3',
+          children: [{
+            id: 7,
+            label: '二级 3-1'
+          }, {
+            id: 8,
+            label: '二级 3-2'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      }
+    },
+
+    methods: {
+      append(store, data) {
+        store.append({ id: id++, label: 'testtest', children: [] }, data);
+      },
+
+      remove(store, data) {
+        store.remove(data);
+      },
+
+      renderContent(h, { node, data, store }) {
+        return (
+          <span>
+            <span>
+              <span>{node.label}</span>
+            </span>
+            <span style="float: right; margin-right: 20px">
+              <el-button size="mini" on-click={ () => this.append(store, data) }>Append</el-button>
+              <el-button size="mini" on-click={ () => this.remove(store, data) }>Delete</el-button>
+            </span>
+          </span>);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 节点过滤
+通过关键字过滤树节点
+
+::: demo 在需要对节点进行过滤时，调用 Tree 实例的`filter`方法，参数为关键字。需要注意的是，此时需要设置`filter-node-method`，值为过滤函数。
+```html
+<el-input
+  placeholder="输入关键字进行过滤"
+  v-model="filterText">
+</el-input>
+
+<el-tree
+  class="filter-tree"
+  :data="data2"
+  :props="defaultProps"
+  default-expand-all
+  :filter-node-method="filterNode"
+  ref="tree2">
+</el-tree>
+
+<script>
+  export default {
+    watch: {
+      filterText(val) {
+        this.$refs.tree2.filter(val);
+      }
+    },
+
+    methods: {
+      filterNode(value, data) {
+        if (!value) return true;
+        return data.label.indexOf(value) !== -1;
+      }
+    },
+
+    data() {
+      return {
+        filterText: '',
+        data2: [{
+          id: 1,
+          label: '一级 1',
+          children: [{
+            id: 4,
+            label: '二级 1-1',
+            children: [{
+              id: 9,
+              label: '三级 1-1-1'
+            }, {
+              id: 10,
+              label: '三级 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: '一级 2',
+          children: [{
+            id: 5,
+            label: '二级 2-1'
+          }, {
+            id: 6,
+            label: '二级 2-2'
+          }]
+        }, {
+          id: 3,
+          label: '一级 3',
+          children: [{
+            id: 7,
+            label: '二级 3-1'
+          }, {
+            id: 8,
+            label: '二级 3-2'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    }
+  };
+</script>
+```
+:::
+
+### 手风琴模式
+
+对于同一级的节点，每次只能展开一个
+
+::: demo
+```html
+<el-tree
+  :data="data"
+  :props="defaultProps"
+  accordion
+  @node-click="handleNodeClick">
+</el-tree>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          label: '一级 1',
+          children: [{
+            label: '二级 1-1',
+            children: [{
+              label: '三级 1-1-1'
+            }]
+          }]
+        }, {
+          label: '一级 2',
+          children: [{
+            label: '二级 2-1',
+            children: [{
+              label: '三级 2-1-1'
+            }]
+          }, {
+            label: '二级 2-2',
+            children: [{
+              label: '三级 2-2-1'
+            }]
+          }]
+        }, {
+          label: '一级 3',
+          children: [{
+            label: '二级 3-1',
+            children: [{
+              label: '三级 3-1-1'
+            }]
+          }, {
+            label: '二级 3-2',
+            children: [{
+              label: '三级 3-2-1'
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
+      }
+    }
+  };
+</script>
+```
+:::
 
 ### Attributes
 | 参数                    | 说明                                       | 类型                          | 可选值  | 默认值   |

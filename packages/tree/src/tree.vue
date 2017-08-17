@@ -38,7 +38,7 @@
         <td v-if="expendNodes.length > 0 && expendNode.childNodes.length > 0" v-for="expendNode in expendNodes" :class="expendNode.childNodes[0].data.categroy?'categroy':''">
           <div class="categroy-title" v-if="expendNode.childNodes[0].data.categroy">{{expendNode.childNodes[0].data.categroy}}</div>
           <!--:style="{height: expendNode.childNodes[0].data.categroy ? (elHeight-36)+'px':elHeight + 'px'}"-->
-          <div class="el-tree-sub"  v-scroll="{fun:loadMore,arg:expendNode}">
+          <div class="el-tree-sub" :style="{height: expendNode.childNodes[0].data.categroy ? (elHeight-36)+'px':elHeight + 'px'}" v-scroll="{fun:loadMore,arg:expendNode}">
             <el-tree-node
                     v-for="child in expendNode.childNodes"
                     :node="child"
@@ -287,7 +287,6 @@ div{
           node.setCurrentLink(true);
         });
       }
-
     },
 
     methods: {
@@ -334,8 +333,9 @@ div{
         }, null, true);
       },
       setElHeight() {
-        let el = document.getElementsByClassName('el-tree-levels')[0];
+        let el = this.$el.getElementsByClassName('el-tree-levels')[0];
         this.elHeight = parseInt(getStyle(el, 'height'), 0);
+
       },
       handleNodeExpand(nodeData, node, instance) {
         this.oldExpend = Object.assign([], this.expendNodes);
@@ -370,6 +370,7 @@ div{
     mounted() {
       this.expendNodes.push(this.root.childNodes[0]);
       this.root.childNodes[0].expand();
+      this.setElHeight();
     },
     created() {
       this.isTree = true;
