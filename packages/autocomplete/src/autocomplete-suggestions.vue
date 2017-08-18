@@ -98,11 +98,14 @@
 
     methods: {
       select(item) {
-        if (item.openType) {
-          if (item.openType === 1) {
-            this.dispatch('ElAutocomplete', 'item-click', item);
-          }
-        }
+        // if (item.openType) {
+        //   if (item.openType === 1) {
+        //     this.dispatch('ElAutocomplete', 'item-click', item);
+        //   } 
+        // } else {
+        //   this.dispatch('ElAutocomplete', 'item-click', item);
+        // }
+        this.dispatch('ElAutocomplete', 'item-click', item);
       },
       showTip(event, item) {
         let liWidth = document.getElementsByClassName('contentLi')[0].offsetWidth;

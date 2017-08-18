@@ -90,7 +90,8 @@
         loading: false,
         highlightedIndex: -1,
         isHtml: this.onhtml,
-        isDropNone: this.isdrop
+        isDropNone: this.isdrop,
+        isOpen: true
       };
     },
     computed: {
@@ -101,7 +102,8 @@
           return (isValidData || this.loading) && this.isFocus;
         } else {
           let isValidData = Array.isArray(suggestions);
-          return (isValidData || this.loading) && this.isFocus && this.value;
+          let isTrue = this.isFocus || this.isOpen;
+          return (isValidData || this.loading) && isTrue && this.value;
         }
       }
     },
@@ -189,7 +191,12 @@
     },
     mounted() {
       this.$on('item-click', item => {
-        this.select(item);
+        if (item.openType) {
+          this.select(item);
+          this.isOpen = false;
+        } else {
+          this.isOpen = true;
+        }
       });
     },
     beforeDestroy() {
