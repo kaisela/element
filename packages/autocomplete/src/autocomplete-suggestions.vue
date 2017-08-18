@@ -25,7 +25,8 @@
                  slot='content'></div>
             <span class="content"
                v-html='item[props.label]'
-               @mouseenter.self='showTip($event,item)'>
+               @mouseenter.self='showTip($event,item)'
+               @mouseout='hideTip'>
             </span>
           </el-tooltip>
           <!-- <div class="el-tooltip__popper is-dark" 
@@ -109,12 +110,14 @@
       },
       showTip(event, item) {
         let liWidth = document.getElementsByClassName('contentLi')[0].offsetWidth;
-        if (event.target.offsetWidth > liWidth || !item.openType) {
+        if (event.target.offsetWidth > liWidth || item.openType === 0) {
           this.tooltipFlag = false;
         } else {
           this.tooltipFlag = true;
         }
-        console.log(this.tooltipFlag);
+      },
+      hideTip() {
+        this.tooltipFlag = true;
       }
     },
 
