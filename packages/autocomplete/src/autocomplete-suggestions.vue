@@ -17,20 +17,24 @@
         <li
           v-if="!parent.customItem&&html"
           :class="{'highlighted': parent.highlightedIndex === index,'disabled':!item.openType?true:false}"
+          class='contentLi'
           @click="select(item)"
         >
-          <p class="content"
-             v-html='item[props.label]'
-             @mouseenter.self='showTip(item)'
-             @mouseout='hideTip'>
-          </p>
-          <div class="el-tooltip__popper is-dark" 
+          <el-tooltip effect="dark" placement="bottom" :disabled="tooltipFlag">
+            <div v-html="!item.openType?'暂不支持爬取，如有需求请联系客服人员':item[props.label]"
+                 slot='content'></div>
+            <span class="content"
+               v-html='item[props.label]'
+               @mouseenter.self='showTip($event,item)'>
+            </span>
+          </el-tooltip>
+          <!-- <div class="el-tooltip__popper is-dark" 
                v-if='(!parent.customItem)&&html&&(item.targId==id)'>
             <div v-html="!item.openType?'暂不支持爬取，如有需求请联系客服人员':item[props.label]"></div>
             <div x-arrow 
                  class='arrow'>
             </div>
-          </div>
+          </div> -->
         </li>
           
           <li
@@ -72,6 +76,7 @@
       return {
         parent: this.$parent,
         dropdownWidth: '',
+        tooltipFlag: true,
         id: null
       };
     },
@@ -99,11 +104,14 @@
           }
         }
       },
-      showTip(item) {
-        this.id = item.targId;
-      },
-      hideTip() {
-        this.id = null;
+      showTip(event, item) {
+        let liWidth = document.getElementsByClassName('contentLi')[0].offsetWidth;
+        if (event.target.offsetWidth > liWidth || !item.openType) {
+          this.tooltipFlag = false;
+        } else {
+          this.tooltipFlag = true;
+        }
+        console.log(this.tooltipFlag);
       }
     },
 
