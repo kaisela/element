@@ -143,8 +143,8 @@
       loadNode(node, resolve, isMore) {
         if (node.level === 0) {
         return resolve([{
-                                                        'name': '全部'
-                                                        
+                                                        'name': '全部',
+                                                        'selected': 3,
                                                       }]);}
         
         if (node.level === 1) {
@@ -155,39 +155,13 @@
                                                 'aggName': 'A',
                                                 
                                               }, 
-{
-  'name': 'Begion2',
-  'selected': 2,
-  'aggName': 'B',
-},{
-   'name': 'Begion2',
-   'selected': 2,
-   'aggName': 'B',
- },{
-    'name': 'Begion2',
-    'selected': 2,
-    'aggName': 'B',
-  },{
-     'name': 'Begion2',
-     'selected': 2,
-     'aggName': 'B',
-   },{
-      'name': 'Begion2',
-      'selected': 2,
-      'aggName': 'B',
-    },{
-       'name': 'Begion2',
-       'selected': 2,
-       'aggName': 'B',
-     },{
-        'name': 'Begion2',
-        'selected': 2,
-        'aggName': 'B',
-      },{
-         'name': 'Begion2',
-         'selected': 2,
-         'aggName': 'B',
-       }]);
+                                              {
+                                                                      'name': 'Begion2',
+                                                                      'selected': 3,
+                                                                      'aggName': 'B',
+                                                                    }
+
+       ]);
         }
         if (node.level === 2 && node.data.name === 'Aegion1') {
                   return resolve([{
@@ -314,22 +288,11 @@
   @check-change="handleCheckChange">
 </el-tree>
 
-
-<input type="button" value="展现" @click="showTree1">
-<el-tree
-  :data="regions"
-  :props="props"
-  :load="loadNode"
-  lazy
-  v-show="show1"
-  ref="tree2"
-  show-checkbox
-  @check-change="handleCheckChange">
-</el-tree>
 <script>
   export default {
     data() {
       return {
+          
         regions: [{
                       'name': 'region1'
                     }, {
@@ -352,7 +315,39 @@
                       'name': 'region10'
                     }, {
                       'name': 'region11'
-                    }],
+                    },{
+                        'name': 'Begion2',
+                        'selected': 2,
+                        'aggName': 'B',
+                      },{
+                         'name': 'Begion2',
+                         'selected': 2,
+                         'aggName': 'B',
+                       },{
+                          'name': 'Begion2',
+                          'selected': 2,
+                          'aggName': 'B',
+                        },{
+                           'name': 'Begion2',
+                           'selected': 2,
+                           'aggName': 'B',
+                         },{
+                            'name': 'Begion2',
+                            'selected': 2,
+                            'aggName': 'B',
+                          },{
+                             'name': 'Begion2',
+                             'selected': 2,
+                             'aggName': 'B',
+                           },{
+                              'name': 'Begion2',
+                              'selected': 2,
+                              'aggName': 'B',
+                            },{
+                               'name': 'Begion2',
+                               'selected': 2,
+                               'aggName': 'B',
+                             }],
         props: {
           label: 'name',
           children: 'zones'
