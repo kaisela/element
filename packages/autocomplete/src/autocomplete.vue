@@ -152,6 +152,7 @@
         // 因为 blur 事件处理优先于 select 事件执行
         setTimeout(_ => {
           this.isFocus = false;
+          this.isOpen = false;
         }, 100);
       },
       handleKeyEnter() {
