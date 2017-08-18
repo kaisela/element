@@ -220,7 +220,7 @@
     data() {
       return {
         oldVal: [],
-        isSelectAll: true,
+        isSelectAll: this.value.length === this.list.length ? true : false,
         options: [],
         cachedOptions: [],
         createdLabel: null,
