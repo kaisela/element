@@ -99,6 +99,9 @@ div{
   top: 50%;
   margin-top: -45px;
 }
+.el-tree-all .is-curlink{
+  background: none;
+}
 .el-tree-all .el-tree-node__expand-icon{
   display: none;
 }

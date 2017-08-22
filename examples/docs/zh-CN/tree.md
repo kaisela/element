@@ -159,7 +159,40 @@
                                                                       'name': 'Begion2',
                                                                       'selected': 3,
                                                                       'aggName': 'B',
-                                                                    }
+                                                                    },
+                                              {
+                                                                      'name': 'Begion2',
+                                                                      'selected': 2,
+                                                                      'aggName': 'B',
+                                                                    },{
+                                                                       'name': 'Begion2',
+                                                                       'selected': 2,
+                                                                       'aggName': 'B',
+                                                                     },{
+                                                                        'name': 'Begion2',
+                                                                        'selected': 2,
+                                                                        'aggName': 'B',
+                                                                      },{
+                                                                         'name': 'Begion2',
+                                                                         'selected': 2,
+                                                                         'aggName': 'B',
+                                                                       },{
+                                                                          'name': 'Begion2',
+                                                                          'selected': 2,
+                                                                          'aggName': 'B',
+                                                                        },{
+                                                                           'name': 'Begion2',
+                                                                           'selected': 2,
+                                                                           'aggName': 'B',
+                                                                         },{
+                                                                            'name': 'Begion2',
+                                                                            'selected': 2,
+                                                                            'aggName': 'B',
+                                                                          },{
+                                                                             'name': 'Begion2',
+                                                                             'selected': 2,
+                                                                             'aggName': 'B',
+                                                                           }
 
        ]);
         }
@@ -256,7 +289,7 @@
         regions,
         defaultProps,
         props,
-        show:false,
+        show:true,
         show1:false,
         defaultCheckedKeys: [5],
         defaultExpandedKeys: [2, 3],
@@ -276,7 +309,6 @@
 
 ::: demo
 ```html
-<input type="button" value="展现" @click="showTree">
 <el-tree
   :data="regions"
   :props="props"
