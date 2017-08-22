@@ -85,6 +85,7 @@
                                 v-show="currentView === 'date'"
                                 @pick="handleDatePick"
                                 @pick-child="chooseDate"
+                                @changePanel="changeData"
                                 :year="year"
                                 :month="month"
                                 :date="date"

@@ -441,12 +441,6 @@
         if (target.className.indexOf('unused') > -1) {
           return;
         };
-        if (target.className.indexOf('prev-month') > -1) {
-          return;
-        };
-        if (target.className.indexOf('next-month') > -1) {
-          return;
-        };
         let cellIndex = target.cellIndex;
         let rowIndex = target.parentNode.rowIndex;
 
@@ -465,6 +459,7 @@
           }
           newDate.setFullYear(year);
           newDate.setMonth(month);
+          this.$emit('changePanel');
         } else if (className.indexOf('next') !== -1) {
           if (month === 11) {
             year = year + 1;
@@ -474,6 +469,7 @@
           }
           newDate.setFullYear(year);
           newDate.setMonth(month);
+          this.$emit('changePanel');
         }
 
         newDate.setDate(parseInt(text, 10));
