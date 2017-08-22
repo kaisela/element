@@ -555,6 +555,7 @@ export default {
   :onhtml="true"
   @select="handleSelect"
   :isdrop="true"
+  :issearch="true"
   icon="edit"
   :on-icon-click="handleIconClick"
 ></el-autocomplete>

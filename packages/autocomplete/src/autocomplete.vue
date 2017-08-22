@@ -80,7 +80,8 @@
       icon: String,
       onIconClick: Function,
       onhtml: Boolean,
-      isdrop: Boolean
+      isdrop: Boolean,
+      issearch: Boolean
     },
     data() {
       return {
@@ -103,7 +104,7 @@
         } else {
           let isValidData = Array.isArray(suggestions);
           let isTrue = this.isFocus || this.isOpen;
-          return (isValidData || this.loading) && isTrue && this.value;
+          return (isValidData || this.loading) && isTrue && this.value && this.issearch;
         }
       }
     },
@@ -138,13 +139,13 @@
           this.suggestions = [];
           return;
         }
-        if (value) {
+        if (value && this.issearch) {
           this.getData(value);
         }
       },
       handleFocus() {
         this.isFocus = true;
-        if (this.triggerOnFocus && this.value) {
+        if (this.triggerOnFocus && this.value && this.issearch) {
           this.getData(this.value);
         }
       },
