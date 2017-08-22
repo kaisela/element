@@ -5,7 +5,7 @@
                 :style="{
         width: width + 'px'
       }"
-                class="el-picker-panel el-date-picker"
+                class="el-re-picker el-picker-panel el-date-picker"
                 :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
