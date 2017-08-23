@@ -10,7 +10,7 @@
     }"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
-    <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader">
+    <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader" v-show="beforeShow || layout.isShow">
       <table-header
         :store="store"
         :layout="layout"
@@ -21,7 +21,7 @@
     </div>
     <div
       class="el-table__body-wrapper"
-      ref="bodyWrapper"
+      ref="bodyWrapper" v-show="beforeShow || layout.isShow"
       :style="[bodyHeight]">
       <table-body
         :context="context"
@@ -170,6 +170,11 @@
 
       height: [String, Number],
 
+      beforeShow: {
+        type: Boolean,
+        default: true
+      },
+
       maxHeight: [String, Number],
 
       fit: {
@@ -279,9 +284,9 @@
         }
       },
 
-      doLayout() {
+      doLayout(val) {
         this.store.updateColumns();
-        this.layout.update();
+        this.layout.update(val);
         this.updateScrollY();
         this.$nextTick(() => {
           if (this.height) {
@@ -297,7 +302,7 @@
 
     created() {
       this.tableId = 'el-table_' + tableIdSeed + '_';
-      this.debouncedLayout = debounce(50, () => this.doLayout());
+      this.debouncedLayout = debounce(50, () => this.doLayout(true));
     },
 
     computed: {
