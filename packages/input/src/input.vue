@@ -245,7 +245,8 @@
           this.value.to = '';
           this.$refs.inputTo.value = '';
         } else if (/^\d+(\.\d{1,2})?$/.test(value) && value > 0 && (value.length < 16 || Number(value) > Number(this.value.from))) {
-          this.value.to = value;
+          this.value.to = Number(value).toString();
+          this.$refs.inputTo.value = Number(value).toString();
         } else {
           this.$refs.inputTo.value = this.value.to;
         }
