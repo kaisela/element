@@ -7,7 +7,6 @@ class TableLayout {
     this.columns = null;
     this.fit = true;
     this.showHeader = true;
-    this.isShow = false;
 
     this.height = null;
     this.scrollX = false;
@@ -95,7 +94,7 @@ class TableLayout {
     this.viewportHeight = this.scrollX ? height - (noData ? 0 : this.gutterWidth) : height;
   }
 
-  update(val) {
+  update() {
     const fit = this.fit;
     const columns = this.table.columns;
     const bodyWidth = this.table.$el.clientWidth;
@@ -180,9 +179,6 @@ class TableLayout {
       });
 
       this.rightFixedWidth = rightFixedWidth;
-    }
-    if (val) {
-      this.isShow = true;
     }
   }
 }

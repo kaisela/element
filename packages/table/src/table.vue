@@ -4,13 +4,14 @@
       'el-table--fit': fit,
       'el-table--striped': stripe,
       'el-table--border': border,
+      'el-table--hidden': isHidden,
       'el-table--fluid-height': maxHeight,
       'el-table--enable-row-hover': !store.states.isComplex,
       'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
     }"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
-    <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader" v-show="beforeShow || layout.isShow">
+    <div class="el-table__header-wrapper" ref="headerWrapper" v-if="showHeader">
       <table-header
         :store="store"
         :layout="layout"
@@ -21,7 +22,7 @@
     </div>
     <div
       class="el-table__body-wrapper"
-      ref="bodyWrapper" v-show="beforeShow || layout.isShow"
+      ref="bodyWrapper"
       :style="[bodyHeight]">
       <table-body
         :context="context"
@@ -170,11 +171,6 @@
 
       height: [String, Number],
 
-      beforeShow: {
-        type: Boolean,
-        default: true
-      },
-
       maxHeight: [String, Number],
 
       fit: {
@@ -261,11 +257,13 @@
         });
 
         const scrollBodyWrapper = event => {
-          const deltaX = event.deltaX;
+          const { deltaX, deltaY } = event;
+
+          if (Math.abs(deltaX) < Math.abs(deltaY)) return;
 
           if (deltaX > 0) {
             this.bodyWrapper.scrollLeft += 10;
-          } else {
+          } else if (deltaX < 0) {
             this.bodyWrapper.scrollLeft -= 10;
           }
         };
@@ -284,9 +282,9 @@
         }
       },
 
-      doLayout(val) {
+      doLayout() {
         this.store.updateColumns();
-        this.layout.update(val);
+        this.layout.update();
         this.updateScrollY();
         this.$nextTick(() => {
           if (this.height) {
@@ -296,13 +294,16 @@
           } else if (this.shouldUpdateHeight) {
             this.layout.updateHeight();
           }
+          if (this.$el) {
+            this.isHidden = this.$el.clientWidth === 0;
+          }
         });
       }
     },
 
     created() {
       this.tableId = 'el-table_' + tableIdSeed + '_';
-      this.debouncedLayout = debounce(50, () => this.doLayout(true));
+      this.debouncedLayout = debounce(50, () => this.doLayout());
     },
 
     computed: {
@@ -317,7 +318,7 @@
       },
 
       selection() {
-        return this.store.selection;
+        return this.store.states.selection;
       },
 
       columns() {
@@ -456,6 +457,7 @@
       return {
         store,
         layout,
+        isHidden: false,
         renderExpanded: null,
         resizeProxyVisible: false
       };
