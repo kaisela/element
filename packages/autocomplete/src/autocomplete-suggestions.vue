@@ -21,7 +21,7 @@
           @click="select(item)"
         >
           <el-tooltip effect="dark" placement="bottom" :disabled="tooltipFlag">
-            <div v-html="!item.openType?'暂不支持爬取，如有需求请联系客服人员':item[props.label]"
+            <div v-html="!item.openType?'暂不支持爬取，如有需求请联系销售人员':item[props.label]"
                  slot='content'></div>
             <span class="content"
                v-html='item[props.label]'
@@ -31,7 +31,7 @@
           </el-tooltip>
           <!-- <div class="el-tooltip__popper is-dark" 
                v-if='(!parent.customItem)&&html&&(item.targId==id)'>
-            <div v-html="!item.openType?'暂不支持爬取，如有需求请联系客服人员':item[props.label]"></div>
+            <div v-html="!item.openType?'暂不支持爬取，如有需求请联系销售人员':item[props.label]"></div>
             <div x-arrow 
                  class='arrow'>
             </div>
