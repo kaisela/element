@@ -165,7 +165,7 @@
         this.$emit('input', item[this.props.value]);
         this.$emit('select', item);
         this.$nextTick(_ => {
-          this.suggestions = [];
+          // this.suggestions = [];
         });
       },
       highlight(index) {
