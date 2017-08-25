@@ -156,15 +156,6 @@ export default class Node {
     }
 
     child.level = this.level + 1;
-
-    if (child.data.isLeaf) {
-      child.isLeaf = true;
-    }
-    if (typeof index === 'undefined' || index < 0) {
-      this.childNodes.push(child);
-    } else {
-      this.childNodes.splice(index, 0, child);
-    }
     if (child.data.selected) {
       switch (child.data.selected) {
         case 1:
@@ -180,6 +171,16 @@ export default class Node {
     if (this.checked) {
       child.setChecked(true);
     }
+
+    if (child.data.isLeaf) {
+      child.isLeaf = true;
+    }
+    if (typeof index === 'undefined' || index < 0) {
+      this.childNodes.push(child);
+    } else {
+      this.childNodes.splice(index, 0, child);
+    }
+
     this.updateLeafState();
   }
 

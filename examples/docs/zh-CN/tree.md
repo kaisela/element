@@ -150,7 +150,7 @@
         if (node.level === 1) {
           return resolve([{
                                                 'name': 'Aegion1',
-                                                'selected': 1,
+                                                'selected': 2,
                                                 'categroy': '行业',
                                                 'aggName': 'A',
                                                 
@@ -159,40 +159,7 @@
                                                                       'name': 'Begion2',
                                                                       'selected': 3,
                                                                       'aggName': 'B',
-                                                                    },
-                                              {
-                                                                      'name': 'Begion2',
-                                                                      'selected': 2,
-                                                                      'aggName': 'B',
-                                                                    },{
-                                                                       'name': 'Begion2',
-                                                                       'selected': 2,
-                                                                       'aggName': 'B',
-                                                                     },{
-                                                                        'name': 'Begion2',
-                                                                        'selected': 2,
-                                                                        'aggName': 'B',
-                                                                      },{
-                                                                         'name': 'Begion2',
-                                                                         'selected': 2,
-                                                                         'aggName': 'B',
-                                                                       },{
-                                                                          'name': 'Begion2',
-                                                                          'selected': 2,
-                                                                          'aggName': 'B',
-                                                                        },{
-                                                                           'name': 'Begion2',
-                                                                           'selected': 2,
-                                                                           'aggName': 'B',
-                                                                         },{
-                                                                            'name': 'Begion2',
-                                                                            'selected': 2,
-                                                                            'aggName': 'B',
-                                                                          },{
-                                                                             'name': 'Begion2',
-                                                                             'selected': 2,
-                                                                             'aggName': 'B',
-                                                                           }
+                                                                    }
 
        ]);
         }
@@ -205,7 +172,7 @@
                                                         'isLeaf': true
                                                       }, {
                                                         'name': 'Znode2',
-                                                        'selected': 2,
+                                                        'selected': 0,
                                                         'aggName': 'Z',
                                                         'iseaf': true
                                                       }]);
