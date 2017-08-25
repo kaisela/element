@@ -490,6 +490,17 @@
           if (this.filterable && !this.downfilterable) this.query = this.selectedLabel;
           return;
         }
+        let labels = [];
+        if (this.value && this.value.length > 0) {
+          this.value.forEach(value => {
+            labels.push(this.getOption(value).currentLabel);
+          });
+          if (this.list && this.value.length === this.list.length) {
+            this.selectedLabel = '全部';
+          } else {
+            this.selectedLabel = labels.join(',');
+          }
+        }
         if (this.list) return;
         let result = [];
         if (Array.isArray(this.value)) {
