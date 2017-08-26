@@ -108,6 +108,7 @@
     
     mounted() {
       this.value5 = ['选项1','选项2'];
+      this.value5 = [];
       this.list = this.states.map(item => { return { value: item, label: item }; });
     },
 

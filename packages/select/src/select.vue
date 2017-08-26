@@ -495,7 +495,7 @@
           this.value.forEach(value => {
             labels.push(this.getOption(value).currentLabel);
           });
-          if (this.list && this.value.length === this.list.length) {
+          if (this.list && this.value && (this.value.length === this.list.length || this.value.length === 0)) {
             this.selectedLabel = '全部';
           } else {
             this.selectedLabel = labels.join(',');
