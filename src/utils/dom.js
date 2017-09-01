@@ -176,3 +176,36 @@ export function setStyle(element, styleName, value) {
     }
   }
 };
+
+export function getText(elem) {
+  let node = null;
+  let ret = '';
+  let i = 0;
+  let nodeType = elem.nodeType;
+
+  if (!nodeType) {
+    // If no nodeType, this is expected to be an array
+    for (i = 0 ; (node = elem[i]); i++) {
+      // Do not traverse comment nodes
+      ret += getText(node);
+    }
+  } else if (nodeType === 1 || nodeType === 9 || nodeType === 11) {
+    // 备注：nodeType === 1 为元素节点，9 为document节点，11为document fragment节点
+    // Use textContent for elements
+    // innerText usage removed for consistency of new lines (see #11153)
+    if (typeof elem.textContent === 'string') {
+      return elem.textContent;
+    } else {
+      // Traverse its children
+      for (elem = elem.firstChild; elem; elem = elem.nextSibling) {
+        ret += getText(elem);
+      }
+    }
+  } else if (nodeType === 3 || nodeType === 4) {
+    // nodeType === 3为TEXT_NODE，4为CDATA_SECTION_NODE
+    return elem.nodeValue;
+  }
+  // Do not include comment or processing instruction nodes
+
+  return ret;
+};

@@ -11,6 +11,7 @@
   .demo-tooltip {
     .el-tooltip + .el-tooltip {
       margin-left: 15px;
+      width: 56px;
     }
     .box {
       width: 400px;
@@ -66,7 +67,7 @@
       <el-button>上左</el-button>
     </el-tooltip>
     <el-tooltip class="item" effect="dark" content="Top Center 提示文字" placement="top">
-      <el-button>上边</el-button>
+      <el-button>AAAAaaaa</el-button>
     </el-tooltip>
     <el-tooltip class="item" effect="dark" content="Top Right 提示文字" placement="top-end">
       <el-button>上右</el-button>

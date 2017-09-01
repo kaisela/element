@@ -1,6 +1,8 @@
 import Popper from 'my-element-ui/src/utils/vue-popper';
 import debounce from 'throttle-debounce/debounce';
 import { getFirstComponentChild } from 'my-element-ui/src/utils/vdom';
+import { getStyle, getText } from 'my-element-ui/src/utils/dom';
+import { getByteLen } from 'my-element-ui/src/utils/util';
 import Vue from 'vue';
 
 export default {
@@ -84,9 +86,16 @@ export default {
     if (!vnode) return vnode;
     const data = vnode.data = vnode.data || {};
     const on = vnode.data.on = vnode.data.on || {};
-
-    on.mouseenter = this.addEventHandle(on.mouseenter, () => { this.setExpectedState(true); this.handleShowPopper(); });
-    on.mouseleave = this.addEventHandle(on.mouseleave, () => { this.setExpectedState(false); this.debounceClose(); });
+    on.mouseenter = this.addEventHandle(on.mouseenter, () => {
+      if (!this.isShow()) {return;}
+      this.setExpectedState(true);
+      this.handleShowPopper();
+    });
+    on.mouseleave = this.addEventHandle(on.mouseleave, () => {
+      if (!this.isShow()) {return;}
+      this.setExpectedState(false);
+      this.debounceClose();
+    });
     data.staticClass = this.concatClass(data.staticClass, 'el-tooltip');
 
     return vnode;
@@ -119,7 +128,17 @@ export default {
       clearTimeout(this.timeout);
       this.showPopper = false;
     },
-
+    isShow() {
+      let contentWidth = parseInt(getStyle(this.$el, 'width'), 10);
+      let fontWidth = parseInt(getStyle(this.$el, 'font-size'), 10);
+      let len = getByteLen(getText(this.$el));
+      let paddingWidth = parseInt(getStyle(this.$el, 'padding-left'), 10) + parseInt(getStyle(this.$el, 'padding-right'), 10);
+      if (fontWidth * Math.ceil(len / 2) > contentWidth - paddingWidth) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     setExpectedState(expectedState) {
       this.expectedState = expectedState;
     }
