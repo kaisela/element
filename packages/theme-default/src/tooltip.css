@@ -100,7 +100,8 @@
       }
 
       @when dark {
-        background: var(--tooltip-fill);
+        /* background: var(--tooltip-fill); */
+        background: rgba(0, 0, 0, 0.6);
         color: var(--tooltip-color);
       }
 
