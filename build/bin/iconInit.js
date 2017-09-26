@@ -11,10 +11,8 @@ nodes.forEach((node) => {
   var selector = node.selector || '';
   var reg = new RegExp(/\.el-icon-([^:]+):before/);
   var arr = selector.match(reg);
-
   if (arr && arr[1]) {
     classList.push(arr[1]);
   }
 });
-
 fs.writeFile(path.resolve(__dirname, '../../examples/icon.json'), JSON.stringify(classList));

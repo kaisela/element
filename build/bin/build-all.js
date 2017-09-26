@@ -12,7 +12,6 @@ delete components.font;
 
 Object.keys(components).forEach(key => {
   const filePath = path.join(__dirname, `../../packages/${key}/cooking.conf.js`);
-
   if (existsSync(filePath)) {
     componentPaths.push(`packages/${key}/cooking.conf.js`);
   }
@@ -20,7 +19,6 @@ Object.keys(components).forEach(key => {
 
 const paths = componentPaths.join(',');
 const cli = path.join('node_modules', '.bin', 'cooking') + ` build -c ${paths} -p`;
-
 execSync(cli, {
   stdio: 'inherit'
 });

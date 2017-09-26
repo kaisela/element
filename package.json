@@ -1,6 +1,6 @@
 {
   "name": "my-element-ui",
-  "version": "1.8.1",
+  "version": "1.8.3",
   "description": "A Component Library for Vue.js.",
   "main": "lib/my-element-ui.common.js",
   "files": [
@@ -11,7 +11,7 @@
   "scripts": {
     "bootstrap": "yarn || npm i",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js & node build/bin/version.js",
-    "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default",
+    "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-default/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-default && gulp build --gulpfile packages/theme-ys2/gulpfile.js && cp-cli packages/theme-default/lib lib/theme-ys2",
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
     "build:umd": "node build/bin/build-locale.js",
     "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage && lerna clean --yes",
@@ -43,7 +43,7 @@
     "url": "https://github.com/kaisela/element/issues"
   },
   "unpkg": "lib/index.js",
-  "style": "lib/theme-default/index.css",
+  "style": "lib/theme-ys2/index.css",
   "dependencies": {
     "async-validator": "1.6.9",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",

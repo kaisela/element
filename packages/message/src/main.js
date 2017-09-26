@@ -20,7 +20,6 @@ var Message = function(options) {
   options.onClose = function() {
     Message.close(id, userOnClose);
   };
-
   instance = new MessageConstructor({
     data: options
   });
