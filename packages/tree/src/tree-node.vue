@@ -48,7 +48,7 @@
   top:12px;
 }
 .is-curlink{
-  background: #ebfcff;
+  background: #edf8ff;
 }
 .el-checkbox__inner{
   width: 14px;
@@ -61,12 +61,12 @@
   left: 4px;
 }
 .el-checkbox__input.is-checked .el-checkbox__inner{
-  background: #0dcfff;
-  border-color: #0dcfff;
+  background: #32a7f1;
+  border-color: #32a7f1;
 }
 .el-checkbox__input.is-indeterminate .el-checkbox__inner{
-  background: #0dcfff;
-  border-color: #0dcfff;
+  background: #32a7f1;
+  border-color: #32a7f1;
 }
 .el-tree-node__expand-icon{
   border: 5px solid transparent;
@@ -74,7 +74,7 @@
   border-left-color: #dfdfdf;
 }
 .is-checked .el-tree-node__label{
-  color:#0dcfff;
+  color:#32a7f1;
 }
 </style>
 <script type="text/jsx">

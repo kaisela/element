@@ -100,35 +100,40 @@
       }
 
       @when dark {
-        /* background: var(--tooltip-fill); */
-        background: rgba(0, 0, 0, 0.6);
+        background: var(--tooltip-fill);
         color: var(--tooltip-color);
       }
 
       @when light {
         background: var(--tooltip-color);
-        border: 1px solid var(--tooltip-fill);
+        border: 1px solid rgb(231, 231, 231);
+        /* border: 1px solid var(--tooltip-fill); */
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
 
         &[x-placement^="top"] .popper__arrow {
-          border-top-color: var(--tooltip-fill);
+          border-top-color: rgb(231, 231, 231);
+          /* border-top-color: var(--tooltip-fill); */
           &::after {
             border-top-color: var(--tooltip-color);
           }
         }
         &[x-placement^="bottom"] .popper__arrow {
-          border-bottom-color: var(--tooltip-fill);
+          border-bottom-color: rgb(231, 231, 231);
+          /* border-bottom-color: var(--tooltip-fill); */
           &::after {
             border-bottom-color: var(--tooltip-color);
           }
         }
         &[x-placement^="left"] .popper__arrow {
-          border-left-color: var(--tooltip-fill);
+          border-left-color: rgb(231, 231, 231);
+          /* border-left-color: var(--tooltip-fill); */
           &::after {
             border-left-color: var(--tooltip-color);
           }
         }
         &[x-placement^="right"] .popper__arrow {
-          border-right-color: var(--tooltip-fill);
+          border-right-color: rgb(231, 231, 231));
+          /* border-right-color: var(--tooltip-fill); */
           &::after {
             border-right-color: var(--tooltip-color);
           }

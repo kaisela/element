@@ -96,9 +96,9 @@
           </el-option>
           <slot></slot>
         </el-scrollbar>
-        <div style="padding: 6px 10px; text-align: right; border-top: 1px solid #e7e7e7;" v-if="list">
-          <el-checkbox style="float: left; margin-top: 5px" v-model="isSelectAll" @change="selectAll">全部</el-checkbox>
-          <el-button style="border-radius: 14px; padding: 7px 16px;" :disabled="value.length === 0" @click="confrimSelect">确定</el-button>
+        <div style="padding: 8px 18px; background-color: #f3f3f3; text-align: right;" v-if="list">
+          <el-checkbox style="float: left; margin-top: 6px;" v-model="isSelectAll" @change="selectAll">全部</el-checkbox>
+          <span><el-button type="primary" style="border-radius: 4px; padding: 9px 17px;" :disabled="value.length === 0" @click="confrimSelect">确定</el-button></span>
         </div>
         <p class="el-select-dropdown__empty" v-if="emptyText && (allowCreate && options.length === 0 || !allowCreate)">{{ emptyText }}</p>
       </el-select-menu>
