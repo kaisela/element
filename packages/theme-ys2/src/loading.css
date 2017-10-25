@@ -34,7 +34,7 @@
     position: absolute;
 
     .el-loading-text {
-      color: var(--color-primary);
+      color: var(--color-dark-gray);
       margin: 3px 0;
       font-size: 14px;
     }
