@@ -406,6 +406,9 @@
       ElInput
     },
     created() {
+      // let dateList = JSON.stringify([{"date":"2017-11-10","seedCount":0,"available":20},{"date":"2017-11-11","seedCount":0,"available":20},{"date":"2017-11-12","seedCount":0,"available":20},{"date":"2017-11-13","seedCount":0,"available":20},{"date":"2017-11-14","seedCount":0,"available":20},{"date":"2017-11-15","seedCount":0,"available":20},{"date":"2017-11-16","seedCount":0,"available":20},{"date":"2017-11-17","seedCount":0,"available":20},{"date":"2017-10-28","seedCount":18,"available":2},{"date":"2017-11-18","seedCount":0,"available":20},{"date":"2017-10-29","seedCount":15,"available":5},{"date":"2017-11-19","seedCount":0,"available":20},{"date":"2017-10-30","seedCount":15,"available":5},{"date":"2017-11-20","seedCount":0,"available":20},{"date":"2017-10-31","seedCount":21,"available":-1},{"date":"2017-11-21","seedCount":0,"available":20},{"date":"2017-11-22","seedCount":0,"available":20},{"date":"2017-11-01","seedCount":15,"available":5},{"date":"2017-11-23","seedCount":0,"available":20},{"date":"2017-11-02","seedCount":12,"available":8},{"date":"2017-11-24","seedCount":0,"available":20},{"date":"2017-11-03","seedCount":12,"available":8},{"date":"2017-11-25","seedCount":0,"available":20},{"date":"2017-11-04","seedCount":12,"available":8},{"date":"2017-11-26","seedCount":0,"available":20},{"date":"2017-11-05","seedCount":12,"available":8},{"date":"2017-11-06","seedCount":9,"available":11},{"date":"2017-11-07","seedCount":0,"available":20},{"date":"2017-11-08","seedCount":0,"available":20},{"date":"2017-11-09","seedCount":0,"available":20}])
+      // localStorage.setItem('dateList',dateList)
+      // localStorage.setItem('seedCount',3)
       this.resource = JSON.parse(localStorage.getItem('dateList')); // 初始化的时候给数据;
       this.seedCount = parseInt(localStorage.getItem('seedCount'), 10);
     },

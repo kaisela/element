@@ -262,9 +262,6 @@
         ]
       };
     },
-    mounted() {
-
-    },
     methods: {
       hideTable($event) {
         this.$emit('pick-child');
@@ -459,7 +456,9 @@
           }
           newDate.setFullYear(year);
           newDate.setMonth(month);
-          this.$emit('changePanel');
+          setTimeout(()=>{
+            this.$emit('changePanel');
+          },10)
         } else if (className.indexOf('next') !== -1) {
           if (month === 11) {
             year = year + 1;
@@ -469,9 +468,11 @@
           }
           newDate.setFullYear(year);
           newDate.setMonth(month);
-          this.$emit('changePanel');
+          setTimeout(()=>{
+            this.$emit('changePanel');
+          },10)
         }
-
+        
         newDate.setDate(parseInt(text, 10));
         if (this.selectionMode === 'range') {
           if (this.minDate && this.maxDate) {
