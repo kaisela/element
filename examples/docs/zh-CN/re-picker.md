@@ -1,4 +1,4 @@
-## RePicker re-picker
+<!-- ## RePicker re-picker
 
 <template>
   <div class="block">
@@ -48,4 +48,4 @@
       };
     }
   };
-</script>
+</script> -->
