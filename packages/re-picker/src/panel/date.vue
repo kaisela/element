@@ -395,6 +395,7 @@
           this.year = this.date.getFullYear();
           this.month = this.date.getMonth();
         }
+        this.changeData()
       }
     },
 
