@@ -124,6 +124,7 @@
     },
 
     props: {
+      valueSet: Object,
       value: [String, Number, Object],
       placeholder: String,
       size: String,
@@ -185,9 +186,13 @@
         }
       },
       handleFromBlur(event) {
-        if (this.value.to !== '' && Number(this.value.from) >= Number(this.value.to)) {
-          this.value.from = '';
-          this.$refs.inputFrom.value = '';
+        const min = (this.valueSet && this.valueSet.from) || 0;
+        if (this.value.from < min) {
+          this.value.from = min;
+          this.$refs.inputFrom.value = min;
+        } else if (this.value.to !== '' && Number(this.value.from) >= Number(this.value.to)) {
+          this.value.from = min ? min : '';
+          this.$refs.inputFrom.value = min ? min : '';
         }
         this.$emit('blur', event);
         if (this.validateEvent) {
@@ -195,9 +200,18 @@
         }
       },
       handleToBlur(event) {
-        if (this.value.from !== '' && Number(this.value.from) >= Number(this.value.to)) {
-          this.value.to = '';
-          this.$refs.inputTo.value = '';
+        const min = (this.valueSet && this.valueSet.from) || 0;
+        if (this.value.to <= min) {
+          if (this.value.from !== '') {
+            this.value.to = Number(this.value.from) + 1;
+            this.$refs.inputTo.value = Number(this.value.from) + 1;
+          } else {
+            this.value.to = Number(min) + 1;
+            this.$refs.inputTo.value = Number(min) + 1;
+          }
+        } else if (this.value.from !== '' && Number(this.value.from) >= Number(this.value.to)) {
+          this.value.to = Number(this.value.from) + 1;
+          this.$refs.inputTo.value = Number(this.value.from) + 1;
         }
         this.$emit('blur', event);
         if (this.validateEvent) {
@@ -226,11 +240,12 @@
         this.$emit('change', value);
       },
       handleInputFrom(event) {
+        const max = (this.valueSet && this.valueSet.to) || 9999999999999999;
         const value = event.target.value;
         if (value === '') {
           this.value.from = '';
           this.$refs.inputFrom.value = '';
-        } else if (/^\d+(\.\d{1,2})?$/.test(value) && (this.value.to === '' || Number(value) < Number(this.value.to))) {
+        } else if (/^\d+(\.\d{1,2})?$/.test(value) && Number(value) < Number(max) && (this.value.to === '' || Number(value) < Number(this.value.to))) {
           this.value.from = Number(value).toString();
           this.$refs.inputFrom.value = Number(value).toString();
         } else {
@@ -240,11 +255,12 @@
         this.$emit('change', this.value);
       },
       handleInputTo(event) {
+        const max = (this.valueSet && this.valueSet.to) || 9999999999999999;
         const value = event.target.value;
         if (value === '') {
           this.value.to = '';
           this.$refs.inputTo.value = '';
-        } else if (/^\d+(\.\d{1,2})?$/.test(value) && value > 0 && (value.length < 16 || Number(value) > Number(this.value.from))) {
+        } else if (/^\d+(\.\d{1,2})?$/.test(value) && Number(value) > 0 && Number(value) <= Number(max) && (value.length < 16 || Number(value) > Number(this.value.from))) {
           this.value.to = Number(value).toString();
           this.$refs.inputTo.value = Number(value).toString();
         } else {
