@@ -162,11 +162,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 };
 
 module.exports = {
-<<<<<<< HEAD
   version: '1.8.5',
-=======
-  version: '1.8.4',
->>>>>>> 5a18878b67be56df7fe8c30da9ba76e9b0d0df89
   locale: locale.use,
   i18n: locale.i18n,
   install,

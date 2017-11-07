@@ -131,7 +131,7 @@ export default {
       let fontWidth = parseInt(getStyle(this.$el, 'font-size'), 10);
       let len = getByteLen(getText(this.$el));
       let paddingWidth = parseInt(getStyle(this.$el, 'padding-left'), 10) + parseInt(getStyle(this.$el, 'padding-right'), 10);
-      if (fontWidth * Math.ceil(len / 2) > contentWidth - paddingWidth) {
+      if (fontWidth * (len / 2) > contentWidth - paddingWidth) {
         return true;
       } else {
         return false;

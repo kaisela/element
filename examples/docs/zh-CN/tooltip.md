@@ -66,14 +66,14 @@
     <el-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top-start">
       <el-button>上左</el-button>
     </el-tooltip>
-    <el-tooltip class="item" effect="dark" content="Top Center 提示文字" placement="top">
-      <el-button>AAAAaaaa</el-button>
+    <el-tooltip class="item" effect="dark" content="口碑/品牌" placement="top">
+      <el-button style="width:80px">口碑/品牌</el-button>
     </el-tooltip>
     <el-tooltip class="item" effect="dark" content="Top Right 提示文字" placement="top-end">
       <el-button>上右</el-button>
     </el-tooltip>
   </div>
-  <div class="left">
+  <div class="left"> 
     <el-tooltip class="item" effect="dark" content="Left Top 提示文字" placement="left-start">
       <el-button>左上</el-button>
     </el-tooltip>
