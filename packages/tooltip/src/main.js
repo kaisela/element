@@ -71,7 +71,7 @@ export default {
             class={
               ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
             }>
-            <div style="max-width: 720px;">
+            <div style="max-width: 580px;">
               { this.$slots.content || this.content }
             </div>
           </div>

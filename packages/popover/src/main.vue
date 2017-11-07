@@ -6,7 +6,7 @@
         :class="[popperClass]"
         ref="popper"
         v-show="!disabled && showPopper"
-        :style="{ width: width + 'px' }">
+        :style="{ width: width + 'px', maxWidth: maxWidth + 'px' }">
         <div class="el-popover__title" v-if="title" v-text="title"></div>
         <slot>{{ content }}</slot>
       </div>
@@ -36,6 +36,7 @@ export default {
     reference: {},
     popperClass: String,
     width: {},
+    maxWidth: {},
     visibleArrow: {
       default: true
     },

@@ -458,7 +458,7 @@
           newDate.setMonth(month);
           setTimeout(()=>{
             this.$emit('changePanel');
-          },20)
+          }, 20);
         } else if (className.indexOf('next') !== -1) {
           if (month === 11) {
             year = year + 1;
@@ -470,9 +470,9 @@
           newDate.setMonth(month);
           setTimeout(()=>{
             this.$emit('changePanel');
-          },20)
+          }, 20);
         }
-        
+
         newDate.setDate(parseInt(text, 10));
         if (this.selectionMode === 'range') {
           if (this.minDate && this.maxDate) {
