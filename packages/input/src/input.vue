@@ -74,17 +74,20 @@
           @click="handleIconClick">
         </i>
       </slot>
-      <input
-        v-if="type !== 'textarea'"
-        class="el-input__inner"
-        v-bind="$props"
-        :autocomplete="autoComplete"
-        :value="currentValue"
-        ref="input"
-        @input="handleInput"
-        @focus="handleFocus"
-        @blur="handleBlur"
-      >
+      <el-tooltip effect="light" placement="top">
+        <div slot="content">{{currentValue}}</div>
+        <input
+          v-if="type !== 'textarea'"
+          class="el-input__inner"
+          v-bind="$props"
+          :autocomplete="autoComplete"
+          :value="currentValue"
+          ref="input"
+          @input="handleInput"
+          @focus="handleFocus"
+          @blur="handleBlur"
+        >
+      </el-tooltip>
       <i class="el-input__icon el-icon-loading" v-if="validating"></i>
       <!-- 后置元素 -->
       <div class="el-input-group__append" v-if="$slots.append">

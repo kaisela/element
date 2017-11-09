@@ -130,6 +130,9 @@ export default {
       let contentWidth = parseInt(getStyle(this.$el, 'width'), 10);
       let fontWidth = parseInt(getStyle(this.$el, 'font-size'), 10);
       let len = getByteLen(getText(this.$el));
+      if (len === 0 && this.$el.tagName === 'INPUT') {
+        len = getByteLen(this.$el.value);
+      }
       let paddingWidth = parseInt(getStyle(this.$el, 'padding-left'), 10) + parseInt(getStyle(this.$el, 'padding-right'), 10);
       if (fontWidth * (len / 2) > contentWidth - paddingWidth) {
         return true;
