@@ -23,7 +23,7 @@
         @blur="handleFromBlur"
       >
     </div>
-    <span style="margin: 0 5px;">至</span>
+    <span style="margin: 0 5px;font-size: 12px;">至</span>
     <div :class="[
       type === 'textarea' ? 'el-textarea' : 'el-input',
       size ? 'el-input--' + size : '',
